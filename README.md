@@ -1,27 +1,75 @@
-# TicTacToe
+# Angular Tic-Tac-Toe Game 🎮
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.8.
+Welcome to the Angular Tic-Tac-Toe Game repository! This project showcases a modern, responsive Tic-Tac-Toe game built with Angular. Dive into the world of front-end development with this classic game, featuring clean code, modular components, and a sleek user interface. 🚀✨
 
-## Development server
+## Features 🌟
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Implements a score tracking system for X wins, O wins, ties, and total games played.
+- Adds "Reset" and "Stop" buttons as shown in the image.
+- Displays the current player's turn.
+- Shows the winner or if it's a draw.
+- The game board is now centered and responsive.
+- Improved visual feedback for player moves (X in blue, O in red).
+- The ability to stop the game at any point.
 
-## Code scaffolding
+## Future Enhancements 🌠
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- An option to play against an AI opponent.
+- Animations for placing X's and O's.
+- Sound effects for moves and game outcomes.
+- A settings menu to customize game options (e.g., board size, win condition).
+- Local storage to persist scores between sessions.
+- A modal or animation to celebrate the winner.
 
-## Build
+## Getting Started 🛠️
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Follow these instructions to get a copy of the project up and running on your local machine.
 
-## Running unit tests
+### Prerequisites
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Node.js and npm installed on your machine.
 
-## Running end-to-end tests
+### Installation
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/riteshporiya/angular-tic-tac-toe-game.git
 
-## Further help
+    cd angular-tic-tac-toe-game
+    ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+3. Run the application:
+    ```bash
+    ng serve
+    ```
+
+4. Open your browser and navigate to `http://localhost:4200`.
+
+## Usage 📖
+
+- Click on a cell to place your move (X or O).
+- The current player's turn is displayed.
+- The score tracking system updates automatically.
+- Use the "Reset" button to start a new game.
+- Use the "Stop" button to stop the current game.
+- Enjoy playing!
+
+## Contributing 🤝
+
+Contributions are welcome! Please open an issue or submit a pull request for any changes or enhancements you would like to see.
+
+## License 📄
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments 🙏
+
+- Inspired by classic Tic-Tac-Toe games.
+- Built with Angular and Bootstrap.
+
+Happy coding! 🎉
