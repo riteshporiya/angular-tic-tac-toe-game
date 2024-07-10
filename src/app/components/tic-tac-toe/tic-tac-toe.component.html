@@ -1,0 +1,33 @@
+<div class="score-board mb-3">
+    <div class="row text-center">
+        <div class="col">X-Player: {{ ticTacToeService.xScore }}</div>
+        <div class="col">Tie: {{ ticTacToeService.tieScore }}</div>
+        <div class="col">O-Player: {{ ticTacToeService.oScore }}</div>
+        <div class="col">Total Games: {{ ticTacToeService.totalGames }}</div>
+    </div>
+</div>
+
+<div class="game-board mb-3">
+    <table class="table table-bordered">
+        <tbody>
+            <tr *ngFor="let row of ticTacToeService.board; let i = index">
+                <td *ngFor="let cell of row; let j = index" (click)="onCellClick(i, j)"
+                    [ngClass]="{'bg-light': cell === '', 'text-primary': cell === 'X', 'text-danger': cell === 'O'}"
+                    style="height: 80px; width: 80px; font-size: 2rem; text-align: center; vertical-align: middle; cursor: pointer;">
+                    {{ cell }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="text-center mb-3">
+    <h3 *ngIf="!ticTacToeService.gameOver">Player {{ ticTacToeService.currentPlayer }}'s Chance</h3>
+    <h3 *ngIf="ticTacToeService.winner">Winner: Player {{ ticTacToeService.winner }}</h3>
+    <h3 *ngIf="ticTacToeService.isDraw">It's a draw!</h3>
+</div>
+
+<div class="d-flex justify-content-center">
+    <button class="btn btn-secondary me-2" (click)="resetGame()">Reset</button>
+    <button class="btn btn-danger" (click)="stopGame()">Stop</button>
+</div>

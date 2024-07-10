@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.game-board {
+    table {
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+
+    td {
+        border: 2px solid #000;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    }
+}
