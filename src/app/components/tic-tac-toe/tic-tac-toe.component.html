@@ -1,33 +1,119 @@
-<div class="score-board mb-3">
+<div class="score-board">
     <div class="row text-center">
-        <div class="col">X-Player: {{ ticTacToeService.xScore }}</div>
-        <div class="col">Tie: {{ ticTacToeService.tieScore }}</div>
-        <div class="col">O-Player: {{ ticTacToeService.oScore }}</div>
-        <div class="col">Total Games: {{ ticTacToeService.totalGames }}</div>
+        <div class="col">
+            <div class="score-value">{{ ticTacToeService.xScore }}</div>
+            <div class="score-label">X-Player</div>
+        </div>
+        <div class="col">
+            <div class="score-value">{{ ticTacToeService.tieScore }}</div>
+            <div class="score-label">Ties</div>
+        </div>
+        <div class="col">
+            <div class="score-value">{{ ticTacToeService.oScore }}</div>
+            <div class="score-label">O-Player</div>
+        </div>
+        <div class="col">
+            <div class="score-value">{{ ticTacToeService.totalGames }}</div>
+            <div class="score-label">Total</div>
+        </div>
+    </div>
+    <div class="text-center mt-3">
+        <button class="btn btn-sm btn-outline-secondary" (click)="ticTacToeService.resetScores()">
+            <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Scores
+        </button>
     </div>
 </div>
 
-<div class="game-board mb-3">
-    <table class="table table-bordered">
+<!-- <app-game-settings></app-game-settings> -->
+
+<div class="settings">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" [checked]="ticTacToeService.playAgainstAI" 
+            (change)="ticTacToeService.toggleAI()" id="playAgainstAI">
+        <label class="form-check-label" for="playAgainstAI">
+            <i class="bi bi-cpu me-1"></i> Play against AI
+        </label>
+    </div>
+    
+    <!-- <div class="form-check form-switch mt-2">
+        <input class="form-check-input" type="checkbox" [checked]="ticTacToeService.soundEnabled" 
+            (change)="toggleSound()" id="soundToggle">
+        <label class="form-check-label" for="soundToggle">
+            <i class="bi" [class.bi-volume-up]="ticTacToeService.soundEnabled" 
+                [class.bi-volume-mute]="!ticTacToeService.soundEnabled"></i>
+            {{ ticTacToeService.soundEnabled ? 'Sound On' : 'Sound Off' }}
+        </label>
+    </div> -->
+    
+    <div class="mt-3" *ngIf="ticTacToeService.playAgainstAI">
+        <label class="form-label mb-2">AI Difficulty:</label>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn" 
+                [class.btn-primary]="ticTacToeService.aiDifficulty === 'easy'"
+                [class.btn-outline-primary]="ticTacToeService.aiDifficulty !== 'easy'"
+                (click)="ticTacToeService.setAIDifficulty('easy')">
+                <i class="bi bi-emoji-smile me-1"></i> Easy
+            </button>
+            <button type="button" class="btn" 
+                [class.btn-primary]="ticTacToeService.aiDifficulty === 'medium'"
+                [class.btn-outline-primary]="ticTacToeService.aiDifficulty !== 'medium'"
+                (click)="ticTacToeService.setAIDifficulty('medium')">
+                <i class="bi bi-emoji-neutral me-1"></i> Medium
+            </button>
+            <button type="button" class="btn" 
+                [class.btn-primary]="ticTacToeService.aiDifficulty === 'hard'"
+                [class.btn-outline-primary]="ticTacToeService.aiDifficulty !== 'hard'"
+                (click)="ticTacToeService.setAIDifficulty('hard')">
+                <i class="bi bi-emoji-dizzy me-1"></i> Hard
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mb-4">
+    <div *ngIf="!ticTacToeService.gameOver" class="player-turn" 
+         [class.player-x]="ticTacToeService.currentPlayer === 'X'"
+         [class.player-o]="ticTacToeService.currentPlayer === 'O'">
+        <i class="bi" [class.bi-x-lg]="ticTacToeService.currentPlayer === 'X'" 
+           [class.bi-circle]="ticTacToeService.currentPlayer === 'O'"></i>
+        Player {{ ticTacToeService.currentPlayer }}'s Turn
+    </div>
+    
+    <div *ngIf="ticTacToeService.winner" class="game-result" 
+         [class.winner-x]="ticTacToeService.winner === 'X'"
+         [class.winner-o]="ticTacToeService.winner === 'O'" [@winnerAnimation]="'show'">
+        <i class="bi" [class.bi-trophy]="true"></i>
+        Player {{ ticTacToeService.winner }} Wins!
+    </div>
+    
+    <div *ngIf="ticTacToeService.isDraw" class="game-result draw" [@winnerAnimation]="'show'">
+        <i class="bi bi-emoji-neutral me-1"></i>
+        It's a Draw!
+    </div>
+</div>
+
+<div class="game-board">
+    <table class="table table-borderless">
         <tbody>
             <tr *ngFor="let row of ticTacToeService.board; let i = index">
-                <td *ngFor="let cell of row; let j = index" (click)="onCellClick(i, j)"
-                    [ngClass]="{'bg-light': cell === '', 'text-primary': cell === 'X', 'text-danger': cell === 'O'}"
-                    style="height: 80px; width: 80px; font-size: 2rem; text-align: center; vertical-align: middle; cursor: pointer;">
-                    {{ cell }}
+                <td *ngFor="let cell of row; let j = index" (click)="onCellClick(i, j)">
+                    <span *ngIf="cell !== ''" [@moveAnimation]
+                          [class.text-primary]="cell === 'X'" 
+                          [class.text-danger]="cell === 'O'">{{ cell }}</span>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<div class="text-center mb-3">
-    <h3 *ngIf="!ticTacToeService.gameOver">Player {{ ticTacToeService.currentPlayer }}'s Chance</h3>
-    <h3 *ngIf="ticTacToeService.winner">Winner: Player {{ ticTacToeService.winner }}</h3>
-    <h3 *ngIf="ticTacToeService.isDraw">It's a draw!</h3>
+<div class="game-controls">
+    <button class="btn btn-primary" (click)="resetGame()">
+        <i class="bi bi-arrow-repeat me-1"></i> Reset
+    </button>
+    <button class="btn btn-danger" (click)="stopGame()">
+        <i class="bi bi-stop-fill me-1"></i> Stop
+    </button>
 </div>
 
-<div class="d-flex justify-content-center">
-    <button class="btn btn-secondary me-2" (click)="resetGame()">Reset</button>
-    <button class="btn btn-danger" (click)="stopGame()">Stop</button>
-</div>
+<!-- Winner Modal -->
+<app-winner-modal [winner]="ticTacToeService.winner" [isDraw]="ticTacToeService.isDraw"></app-winner-modal>

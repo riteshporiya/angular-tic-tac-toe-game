@@ -1,0 +1,33 @@
+<div *ngIf="showModal" class="modal-backdrop" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-content" [@modalAnimation]>
+      <div class="modal-header">
+        <h5 class="modal-title">Game Over</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="winner" class="winner-message">
+          <div class="trophy">🏆</div>
+          <h4 [ngClass]="{'winner-x': winner === 'X', 'winner-o': winner === 'O'}">
+            Player {{ winner }} Wins!
+          </h4>
+          <p>Congratulations on your victory!</p>
+        </div>
+        <div *ngIf="isDraw" class="draw-message">
+          <h4>It's a Draw!</h4>
+          <p>Both players played excellently.</p>
+        </div>
+        <div class="celebration-animation">
+          <span class="confetti">🎉</span>
+          <span class="confetti">🎊</span>
+          <span class="confetti">✨</span>
+          <span class="confetti">🎈</span>
+          <span class="confetti">🎇</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="closeModal()">Play Again</button>
+      </div>
+    </div>
+  </div>
+</div> 

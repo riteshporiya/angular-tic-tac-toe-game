@@ -1,0 +1,30 @@
+<div class="settings-container mb-3">
+  <button class="btn btn-sm btn-outline-secondary mb-2" (click)="toggleSettings()">
+    <span *ngIf="!showSettings">Show Advanced Settings</span>
+    <span *ngIf="showSettings">Hide Advanced Settings</span>
+  </button>
+  
+  <div *ngIf="showSettings" [@settingsAnimation] class="settings-panel p-3 border rounded">
+    <h5>Game Settings</h5>
+    
+    <div class="setting-item mb-2">
+      <label class="form-label">Board Size:</label>
+      <div class="btn-group" role="group">
+        <button *ngFor="let size of boardSizes" type="button" class="btn" 
+            [class.btn-primary]="ticTacToeService.boardSize === size"
+            [class.btn-outline-primary]="ticTacToeService.boardSize !== size"
+            (click)="changeBoardSize(size)">{{ size }}x{{ size }}</button>
+      </div>
+      <small class="form-text text-muted d-block mt-1">Changing board size will reset the current game.</small>
+    </div>
+    
+    <div class="setting-item mb-2">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="soundToggle" 
+               [checked]="ticTacToeService.soundEnabled"
+               (change)="ticTacToeService.toggleSound()">
+        <label class="form-check-label" for="soundToggle">Enable Sound Effects</label>
+      </div>
+    </div>
+  </div>
+</div> 

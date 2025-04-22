@@ -1,10 +1,27 @@
-<div class="container-fluid bg-light min-vh-100 d-flex align-items-center justify-content-center">
-  <div class="bg-white p-4 rounded shadow">
-    <h1 class="text-center mb-4">
-      <span class="text-dark">TIC</span>
-      <span class="text-danger">TAC</span>
-      <span class="text-dark">TOE</span>
-    </h1>
-    <app-tic-tac-toe></app-tic-tac-toe>
-  </div>
+<div class="app-container">
+  <header class="app-header">
+    <div class="container">
+      <div class="logo-container">
+        <div class="logo">
+          <span class="logo-x">X</span>
+          <span class="logo-o">O</span>
+        </div>
+        <h1 class="app-title">Tic-Tac-Toe</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="card game-card">
+        <app-tic-tac-toe></app-tic-tac-toe>
+      </div>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container">
+      <p>&copy; {{ currentYear }} Tic-Tac-Toe Game | <a href="https://github.com/riteshporiya/angular-tic-tac-toe-game">Github</a></p>
+    </div>
+  </footer>
 </div>
